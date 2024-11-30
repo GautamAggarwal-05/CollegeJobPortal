@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { AlignJustify } from "lucide-react";
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
-function Header({user}) {
+function Header({user,profileInfo}) {
   const menuItems = [
     {
       label: "Home",
@@ -22,13 +22,13 @@ function Header({user}) {
       show: !user,
     },
     {
-      label: "Jobs",
-      path: "/jobs",
-      show: user,
+      label:"Feed",
+      path:"/feed",
+      show: profileInfo,
     },
     {
-      label: "Activity",
-      path: "/activity",
+      label: "Jobs",
+      path: "/jobs",
       show: user,
     },
     {
@@ -63,6 +63,7 @@ function Header({user}) {
                 menuItems.show ? (
                   <Link
                     href={menuItems.path}
+                    onClick={()=>sessionStorage.removeItem('filterParams')}
                     key={index}
                     className="flex w-full items-center py-2 text-lg font-semibold"
                   >

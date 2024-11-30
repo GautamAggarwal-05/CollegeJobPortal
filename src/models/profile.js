@@ -1,5 +1,6 @@
 // i am going to manage the student and admin both here beacuse either u can onboard as a student or admin
 import mongoose from "mongoose";
+
 const ProfileSchema = new mongoose.Schema({
     userId: String,
     role:String,
@@ -23,7 +24,6 @@ const ProfileSchema = new mongoose.Schema({
     currentLocation: String,
     homeAddress: String,
     currentCGPA: String,
-    availabilityToStart: String,
     skills: String,
     degreeProgram: String,
     fieldStudy: String,

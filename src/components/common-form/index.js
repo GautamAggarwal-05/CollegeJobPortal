@@ -26,7 +26,7 @@ function CommonForm({
                             {getCurrentControl.label} {/* Label for the input */}
                         </Label>
                         <Input
-                            type="text"
+                            type={getCurrentControl.inputType}
                             disabled={getCurrentControl.disabled}
                             placeholder={getCurrentControl.placeholder}
                             name={getCurrentControl.name}
@@ -70,7 +70,7 @@ function CommonForm({
                             {getCurrentControl.label} {/* Label for default case */}
                         </Label>
                         <Input
-                            type="text"
+                            type={getCurrentControl.inputType}
                             disabled={getCurrentControl.disabled}
                             placeholder={getCurrentControl.placeholder}
                             name={getCurrentControl.name}
