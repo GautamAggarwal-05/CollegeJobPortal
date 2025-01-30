@@ -3,11 +3,11 @@
 import  connectToDB  from "../database/index";
 import Profile from "../models/profile"
 import Job from "../models/job";
+import Feed from "../models/feed";
 import Application from "../models/application";
 import {revalidatePath} from "next/cache";
-//create profile action 
+//create profile action
 export async function createProfile(formData,pathToRevalidate){
-
     await connectToDB();
     await Profile.create(formData);
     revalidatePath(pathToRevalidate)
@@ -16,7 +16,6 @@ export async function createProfile(formData,pathToRevalidate){
 export async function fetchProfileAction(id){
     await connectToDB();
     const result = await Profile.findOne({userId:id})
-
     return JSON.parse(JSON.stringify(result))
 }
 
@@ -128,4 +127,45 @@ export async function updateProfileAction(data,pathToRevalidate){
         userId,email,role,isPremiumUser,memberShipType,memberShipStartDate,memberShipEndDate,adminInfo,studentInfo
     },{new:true});
     revalidatePath(pathToRevalidate)
+}
+
+//create Post Action
+export async function createFeedPostAction(data,pathToRevalidate){
+   await connectToDB();
+   await Feed.create(data);
+   revalidatePath(pathToRevalidate) 
+}
+//fetch all posts Action
+export async function fetchAllFeedPostAction(){
+    await connectToDB();
+    const result = await Feed.find({});
+    return JSON.parse(JSON.stringify(result));
+}
+//update post Action- to update likes
+export async function updateFeedPostAction(data,pathToRevalidate){
+    await connectToDB();
+    const{userId,userName,message,image,likes,_id}=data;
+    await Feed.findOneAndUpdate({
+        _id:_id
+    },{
+        userId,userName,message,image,likes
+    },{new:true});
+
+    revalidatePath(pathToRevalidate)
+}
+
+//delete post Action
+export async function deleteFeedAction(feedId,userId,pathToRevalidate) {
+    await connectToDB();
+    const feed = await Feed.findById(feedId);
+    if(!feed){
+        throw new Error("Feed Not Found");
+    }
+    if(feed.userId !== userId){
+        throw new Error("You are not authorized to delete this Feed.");
+    }
+    await Feed.findByIdAndDelete(feedId);
+    revalidatePath(pathToRevalidate);
+
+    return { message: "Job deleted successfully" };
 }

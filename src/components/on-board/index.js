@@ -45,13 +45,15 @@ function OnBoard(){
     }
 
     function HandleadminFormValidation (){
+        console.log('adminFormData:', adminFormData);
+        console.log('adminFormData collegeLocation:', adminFormData?.collegeLocation);
         return (
         adminFormData && 
-        adminFormData.name.trim()!==''&&
-        adminFormData.collegeName.trim()!=='' &&
-        adminFormData.collegeLocation.trim()!=='' &&
-         adminFormData.collegeRole.trim()!==''&&
-         adminFormData.department.trim()!==''
+        adminFormData?.name.trim()!==''&&
+        adminFormData?.collegeName.trim()!=='' &&
+        adminFormData?.collegeLocation.trim()!=='' &&
+         adminFormData?.role.trim()!==''&&
+         adminFormData?.department.trim()!==''
         );
     }
      function handleStudentFormValidation (){

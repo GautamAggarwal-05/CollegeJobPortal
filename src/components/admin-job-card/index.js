@@ -9,21 +9,28 @@ import { FaUserGroup } from "react-icons/fa6";
 import { FaUserLarge } from "react-icons/fa6";
 import { useState } from "react";
 import JobApplicants from "../job-applicants";
+import { useToast } from '@/hooks/use-toast';
     function AdminJobCard({jobItem,jobApplications,profileInfo}){
         console.log("jobApplication for admin ",jobItem)
 
         const[showApplicatnsDrawer,setShowApplicatnsDrawer] = useState(false);
         const[currentCandidateDetails,setCurrentCandidateDetails] = useState(null);
         const[showCurrentCandidateDetailsModal,setShowCurrentCandidateDetailsModal] = useState(false);
-
+        const {toast} = useToast() 
 
         async function handleDeleteJob() {
             try {
                 await deleteJobAction(jobItem._id,profileInfo?.userId, "/jobs");
-                alert("Job deleted successfully!");
+                toast({
+                    title: "Job Deleted Successfully",
+                    description: `Job listing for ${jobFormData?.role} at ${jobFormData?.companyName} was deleted successfully`,
+                  })
             } catch (error) {
                 console.error(error);
-                alert("Failed to delete the job.");
+                toast({
+                    title: "Failed To deleted Job",
+                    description: `Job listing for ${jobFormData?.role} at ${jobFormData?.companyName}`,
+                  })
             }  
         }  
         return (

@@ -16,8 +16,8 @@ function JobApplicants({
     jobApplications
 }){
     return (
-                <Drawer open={showApplicatnsDrawer} onOpenChange={setShowApplicatnsDrawer}>
-                <DrawerContent className="max-h-[50vh] ">
+                <Drawer open={showApplicatnsDrawer} onOpenChange={(isOpen) => setShowApplicatnsDrawer(isOpen)}>
+                <DrawerContent className="max-h-[50vh] dark:text-black">
                     <ScrollArea className="h-auto overflow-y-auto">
                         <CandidateList
                         currentCandidateDetails={currentCandidateDetails}

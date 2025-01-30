@@ -39,11 +39,11 @@ export const adminOnboardFormControls = [
 ];
 
 export const initialadminFormData = {
-    name: "",
-    collegeName: "",
-    collegeLocation: "",
-    role: "",
-    department: "",
+    name: '',
+    collegeName: '',
+    collegeLocation: '',
+    role: '',
+    department: '',
 };
 
 export const studentOnboardFormControls = [

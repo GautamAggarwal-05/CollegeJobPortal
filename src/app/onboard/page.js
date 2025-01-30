@@ -9,10 +9,6 @@ async function OnBoardPage(){
     //fetch the profile info->either user is student or admin 
     const profileInfo = await fetchProfileAction(user?.id);
     if(profileInfo?._id){
-    //    if( profileInfo?.role === 'admin'&&!profileInfo.isPremiumUser) // FOR MEMBERSHIP 
-    //         redirect('/membership');
-    //     else 
-    //         redirect('/')
     redirect('/');
     }
     else{

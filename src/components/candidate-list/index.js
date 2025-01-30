@@ -2,7 +2,7 @@
 
 import { Fragment } from "react";
 import { Button } from "../ui/button";
-import { Dialog,  DialogContent, DialogTitle, DialogClose } from "@radix-ui/react-dialog";
+import { Dialog, DialogContent, DialogTitle, DialogClose } from "@radix-ui/react-dialog";
 import { getCandidateDetailsByIDAction } from "../../actions";
 import { createClient } from "@supabase/supabase-js";
 
@@ -47,7 +47,7 @@ function CandidateList({
                             <div className="px-4 my-6 flex justify-between items-center">
                                 <h3 className="text-lg font-bold">{jobApplicantItem?.name}</h3>
                                 <Button
-                                    className="flex h-11 items-center justify-center px-5"
+                                    className="flex h-11 items-center justify-center px-5 dark:bg-black dark:text-white"
                                     onClick={() => handleFetchCandidateDetails(jobApplicantItem?.studentUserID)}
                                 >
                                     View Profile
@@ -62,23 +62,26 @@ function CandidateList({
 
             {/* Dialog Box */}
             {showCurrentCandidateDetailsModal && (
-                <Dialog open={showCurrentCandidateDetailsModal} onOpenChange={(isOpen) => setShowCurrentCandidateDetailsModal(isOpen)}>
+                <Dialog  open={showCurrentCandidateDetailsModal} onOpenChange={(isOpen) => setShowCurrentCandidateDetailsModal(isOpen)}>
                     <DialogContent
-                        className="fixed inset-0 z-[1050] flex items-center justify-center bg-black/50 p-4"
+                        className="fixed inset-0 z-[1050] flex items-center justify-center bg-black/50 p-4 "
                         style={{
                             backdropFilter: 'blur(4px)',
                         }}
                     >
-                        <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full   relative mb-[80vh]">
+                        <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full dark:bg-black dark:text-gray-200  relative mb-[80vh]">
+                       
+                                <DialogTitle className= "text-2xl font-bold mb-4 dark:border-b dark:border-white">Candidate Details</DialogTitle>
+                           
                             <DialogClose
                                 className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 cursor-pointer"
-                                onClick={() => setShowCurrentCandidateDetailsModal(false)}
+                                onClick={() => {setShowCurrentCandidateDetailsModal(false)}}
                             >
                                 ✕
                             </DialogClose>
                             {currentCandidateDetails ? (
                                 <div>
-                                    <DialogTitle className="text-2xl font-bold mb-4">Candidate Details</DialogTitle>
+                                    {/* <div className="text-2xl font-bold mb-4 dark:border-b dark:border-white">Candidate Details</div> */}
                                     <div className="space-y-4">
                                         <p>
                                             <span className="font-semibold">Name:</span>{" "}
@@ -101,15 +104,15 @@ function CandidateList({
                                             {currentCandidateDetails?.studentInfo?.degreeProgram}
                                         </p>
                                         <div className="flex gap-4 mt-6 flex-wrap">
-                                        <span className="font-semibold"> Skills:</span> {currentCandidateDetails?.studentInfo?.skills.split(",").map((skillItem,index)=>(
-                                                <div key={index} className="w-[6vw] flex justify-center items-center h-[5vh] bg-black rounded-sm">
-                                                    <h2 className="text-[13px] font-medium text-white">
+                                        <span className="font-semibold "> Skills:</span> {currentCandidateDetails?.studentInfo?.skills.split(",").map((skillItem,index)=>(
+                                                <div key={index} className="w-[6vw] flex justify-center items-center h-[5vh] bg-black dark:bg-white rounded-sm">
+                                                    <h2 className="text-[13px] font-medium text-white dark:text-black">
                                                       {skillItem}
                                                     </h2>
                                                 </div>
                                             ))}
                                         </div>
-                                        <Button onClick={handlePreviewResume} flex h-11 items-center justify-center px-5>Resume</Button>
+                                        <Button onClick={handlePreviewResume} className="flex h-11 items-center justify-center px-5 font-semibold">Resume</Button>
                                     </div>
                                 </div>
                             ) : (

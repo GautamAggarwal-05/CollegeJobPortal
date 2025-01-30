@@ -22,7 +22,7 @@ function CommonForm({
             case "input":
                 content = (
                     <div key={getCurrentControl.name} className="relative flex flex-col mt-8">
-                        <Label htmlFor={getCurrentControl.name} className="mb-2 text-gray-700">
+                        <Label htmlFor={getCurrentControl.name} className="mb-2 text-gray-700 dark:text-white">
                             {getCurrentControl.label} {/* Label for the input */}
                         </Label>
                         <Input

@@ -6,10 +6,11 @@ import { useState } from 'react';
 import CommonForm from '../common-form/index';
 import { InitialpostNewJobFormData, postNewJobFormControls } from '../../utils';
 import { PostNewJobAction } from '../../actions';
+import { useToast } from '@/hooks/use-toast';
 function PostNewJob({profileInfo,user}){
     const [showJobDialog,setShowJobDialog] = useState(false);
     const[jobFormData,setJobFormData] = useState(InitialpostNewJobFormData);
-
+    const {toast} = useToast() 
     function handlePostNewJobValid(){
         return Object.keys(jobFormData).every((control)=> jobFormData[control].trim()!=="");
     }
@@ -22,6 +23,11 @@ function PostNewJob({profileInfo,user}){
 
     setJobFormData(InitialpostNewJobFormData)
     setShowJobDialog(false);
+
+    toast({
+        title: "New Job Posted Successfully",
+        description: `A new job listing for ${jobFormData?.role} at ${jobFormData?.companyName} was created`,
+      })
 }
 
     return (
@@ -50,5 +56,3 @@ function PostNewJob({profileInfo,user}){
 
 export default PostNewJob;
 
-
-// 2min 17 sec video 

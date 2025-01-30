@@ -16,6 +16,10 @@ import {
 import {formUrlQuery} from "../utils/index.js"
 import { useEffect, useState } from "react";
 function JobListing({ user, profileInfo, jobList, jobApplications,filterCategoties}) {
+    console.log(jobList, "jobList");
+    console.log(jobApplications, "jobApplications");
+    console.log(filterCategoties, "filterCategoties");
+    
     const [filterParams, setFilterParams] = useState({})
     const searchParams = useSearchParams()
     const router = useRouter()
@@ -34,7 +38,7 @@ function JobListing({ user, profileInfo, jobList, jobApplications,filterCategoti
             if(indexofCurrentOption === -1)
                      cpyFilterparams[getSectionID].push(getCurrentOption)
             else cpyFilterparams[getSectionID].splice(indexofCurrentOption,1)
-        }
+        }   
         setFilterParams(cpyFilterparams)
         sessionStorage.setItem('filterParams',JSON.stringify(cpyFilterparams))
     }
@@ -70,21 +74,21 @@ function JobListing({ user, profileInfo, jobList, jobApplications,filterCategoti
         <div>
             <div className="mx-auto max-w-7xl">
                 <div
-                    className="flex items-baseline justify-between border-b border-gray-200 pb-6 mt-24 mb-4"
+                    className="flex items-baseline justify-between border-b border-gray-200 pb-6 mt-24 mb-4 dark:border-white"
                     style={{ paddingTop: "2.5rem" }}
                 >
-                    <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+                    <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
                         {profileInfo?.role === "student"
                             ? "Explore All Jobs"
                             : "Jobs Dashboard"}
                     </h1>
                     <div className="flex items-center">
                         {profileInfo?.role === "student" ? (
-                            <Menubar>
+                            <Menubar >
                                 {
-                                    filterMenus.map((filterMenu,index) =>(
-                                        <MenubarMenu key={index}>
-                                                <MenubarTrigger>
+                                    filterMenus.map((filterMenu) =>(
+                                        <MenubarMenu key={filterMenu.id} >
+                                                <MenubarTrigger className="cursor-pointer">
                                                     {filterMenu.name}
                                                 </MenubarTrigger>
                                                 <MenubarContent>
@@ -92,11 +96,11 @@ function JobListing({ user, profileInfo, jobList, jobApplications,filterCategoti
                                                         filterMenu.options.map((option,optionIdx) =>(
                                                         <MenubarItem
                                                          key={optionIdx}
-                                                         className="flex item-center gap-3 "
+                                                         className="flex item-center gap-3"
                                                          onClick={()=>handleFilter(filterMenu.id, option)}
                                                         >
-                                                                    <div className={`h-4 w-4 border rounded-sm border-gray-900 ${filterParams && Object.keys(filterParams).length >0 && filterParams[filterMenu.id] && filterParams[filterMenu.id].indexOf(option) > -1 ?"bg-black" : ""}`}/> {/* Check box  */}
-                                                                    <Label className="cursor-pointer text-sm text-gray-600">{option}</Label>
+                                                                    <div className={`h-4 w-4 border rounded-sm border-gray-900 dark:border-white ${filterParams && Object.keys(filterParams).length >0 && filterParams[filterMenu.id] && filterParams[filterMenu.id].indexOf(option) > -1 ?"bg-black dark:bg-white" : ""}`}/> {/* Check box  */}
+                                                                    <Label className="cursor-pointer text-sm text-gray-600 dark:text-white">{option}</Label>
                                                         </MenubarItem>))
                                                     }
                                                 </MenubarContent>

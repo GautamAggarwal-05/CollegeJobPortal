@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import CommonLayout from "../components/commonlayout/index"; 
 import { ClerkProvider } from "@clerk/nextjs";
-
+import { Toaster } from "@/components/ui/toaster"
 const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 
@@ -31,7 +31,10 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <Suspense fallback={<Loading />}>
-            <CommonLayout>{children}</CommonLayout>
+            <CommonLayout
+            attribute="class"
+            defaultTheme="system">{children}</CommonLayout>
+            <Toaster />
           </Suspense>
         </body>
       </html>
